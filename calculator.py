@@ -1,7 +1,7 @@
 from tkinter import * # imports everything from tkinter
 
 root = Tk() #root is the window into which all other widgets go
-root.title("Ayomide's Calcualtor") #sets name of the window
+root.title("(Insert name)'s Calcualtor") #sets name of the window
 
 operation_number = 0
 current_number_sum = 0
