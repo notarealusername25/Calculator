@@ -78,7 +78,7 @@ def button_decimal():
         e.delete(0, END)
         e.insert(0, (current) + str("."))
 
-        def button_delete():
+def button_delete():
     e.delete([-1])
 
 def button_power():
