@@ -3,12 +3,6 @@ from tkinter import * # imports everything from tkinter
 root = Tk() #root is the window into which all other widgets go
 root.title("(Insert name)'s Calcualtor") #sets name of the window
 
-operation_number = 0
-current_number_sum = 0
-current_number_minus = 0
-current_number_division = 0
-current_number_multiply = 0
-
 #"Columnspan" tells the layout manager that you wish for this widget to occupy more than 1 column i.e. spans ocross 2 columns
 e = Entry(root, width = 50, borderwidth = 5) #"Width" sets the width of the window and "borderwidth" the width of the output box
 #"Entry" creates the box where the numbers are printed
@@ -84,22 +78,7 @@ def button_decimal():
         e.delete(0, END)
         e.insert(0, (current) + str("."))
 
-"""
-def add_point():
-    current_number = e.get()
-    if "." in current_number:
-        print("Number already has a point")
-        pass
-    else:
-        if current_number != "":
-            current_number = str(current_number) + str(".")
-            e.delete(0,END)
-            e.insert(0, current_number)
-        else:
-            current_number = "0."
-            e.insert(0, current_number)"""
-
-def button_delete():
+        def button_delete():
     e.delete([-1])
 
 def button_power():
@@ -118,7 +97,7 @@ def button_addminus():
     else:
         e.insert(0, -(int(current)))
 
-#define code
+#creates the buttons, what they look like and their text
 button_1 = Button(root, text = "1", padx = 40, pady = 20, command = lambda: button_click(1)) #command links to a function which describes what the button can do
 button_2 = Button(root, text = "2", padx = 40, pady = 20, command = lambda: button_click(2))
 button_3 = Button(root, text = "3", padx = 40, pady = 20, command = lambda: button_click(3))
@@ -142,7 +121,7 @@ button_delete = Button(root, text = "DEL", padx = 33, pady = 20, command = butto
 button_power = Button(root, text = "ab", padx = 37, pady = 20, command = button_power)
 button_addminus = Button(root, text = "+/-", padx = 34, pady = 20, command = button_addminus)
 
-#Put the buttons on the screen
+#location of the button on the screen
 button_1.grid(row=3, column=0)
 button_2.grid(row=3, column=1)
 button_3.grid(row=3, column=2)
