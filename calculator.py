@@ -112,7 +112,7 @@ class Cal(Frame):
             self.create_1_function_gu()
 
 root = Tk()
-root.title("booking system")
+root.title("buttons")
 root.geometry("500x500")
 root.configure(bg="white")
 app = Cal(root)
