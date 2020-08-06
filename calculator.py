@@ -1,152 +1,120 @@
-from tkinter import * # imports everything from tkinter
+from tkinter import *
 
-root = Tk() #root is the window into which all other widgets go
-root.title("(Insert name)'s Calcualtor") #sets name of the window
+class Cal(Frame):
+    def __init__(self, maste):
+        self.modefunctio = 1
+        """ Initialize the frame. """
+        super(Cal,self).__init__(maste)
+        self.grid()
 
-#"Columnspan" tells the layout manager that you wish for this widget to occupy more than 1 column i.e. spans ocross 2 columns
-e = Entry(root, width = 50, borderwidth = 5) #"Width" sets the width of the window and "borderwidth" the width of the output box
-#"Entry" creates the box where the numbers are printed
-e.grid(row = 0, column = 0, columnspan = 4, padx = 10, pady = 10) #presets both the row and column to 0 so they can be iterated over and changed later, however it enables the same starting position
+        self.buttons_fr = Frame(self, width= 0, height=0,bg = "red",padx=1, pady =1)#bg = "green")
+        self.buttons_fr.grid(row = 0, column = 0)
 
-#both "e" and "e.grid" are used to flesh out the input bok in the calculator
-"""def button_click(number, entry): #deals with the output section where resuts get printed
-    current_number = e.get()#Returns text
-    e.delete(0, END) #deletes text from first and last
-    e.insert(0, str(current_number) + str(number))"""
-print(dir(Entry))
+        self.buttons_2_functions_1_fr = Frame(self, width=0, height=0,bg = "blue")#bg = "blue")
+        self.buttons_2_functions_1_fr.grid(row = 1, column = 0, columnspan=2)
+        self.create_GU()
 
-def button_click(number):
-    #e.delete(0, END) #deletes whats currently in the box
-    current = e.get()
-    e.delete(0, END)
-    e.insert(0, str(current) + str(number)) #inserts number into the textbox
+    #def create_show_calculations(self):
+        #self.calculation_lbl = Label(self.calculations_frm, text = "will show caluclations here").pack()
 
-def button_clear():
-    e.delete(0, END)
+    def create_button(self):
+        #mc stands for mode change
+        self.mode_change_bt = Button(self.buttons_fr, text = "trig", command = self.mode_chang, padx = 19, pady = 10)
+        self.mode_change_bt.grid(row =0,column =0)
 
-def button_add():
-    first_number = e.get()
-    global f_num
-    global math
-    math = "addition"
-    f_num = int(first_number)
-    e.delete(0, END)
+        #self.plus_btn = Button(self.buttons_frm, text = "plus", height = 1, width = 5)
+        #self.plus_btn.grid(row = 1,column = 0)
 
-def button_equal():
-    second_number = e.get()
-    e.delete(0, END)
-    if math == "addition":
-        e.insert(0, f_num + int(second_number))
-    if math == "subtraction":
-        e.insert(0, f_num - int(second_number))
-    if math == "multiplication":
-        e.insert(0, f_num * int(second_number))
-    if math == "division":
-        e.insert(0, f_num / int(second_number))
-    if math == "power":
-        e.insert(0, f_num ** int(second_number))
+    def create_GU(self):
+        #self.create_show_calculations()
+        self.create_button()
+        self.create_1_function_gu()
 
-def button_subtract():
-    first_number = e.get()
-    global f_num
-    global math
-    math = "subtraction"
-    f_num = int(first_number)
-    e.delete(0, END)
 
-def button_multiply():
-    first_number = e.get()
-    global f_num
-    global math
-    math = "multiplication"
-    f_num = int(first_number)
-    e.delete(0, END)
+    def create_1_function_gu(self):
+        self.sin_bt = Label(self.buttons_2_functions_1_fr, text = "x", padx = 19, pady = 10)
+        self.sin_bt.grid(row = 1, column = 0)
 
-def button_divide():
-    first_number = e.get()
-    global f_num
-    global math
-    math = "division"
-    f_num = int(first_number)
-    e.delete(0, END)
+        self.cos_bt = Label(self.buttons_2_functions_1_fr, text = "y", padx = 19, pady = 10)
+        self.cos_bt.grid(row = 1, column = 1)
 
-def button_decimal():
-    current = e.get()
-    if "." in current:
-        print("Decimal is in number")
-    else:
-        e.delete(0, END)
-        e.insert(0, (current) + str("."))
+        self.cos_bt = Label(self.buttons_2_functions_1_fr, text="z", padx=19, pady=10)
+        self.cos_bt.grid(row=1, column=2)
 
-def button_delete():
-    e.delete([-1])
 
-def button_power():
-    first_number = e.get()
-    global f_num
-    global math
-    math = "power"
-    f_num = int(first_number)
-    e.delete(0, END)
+    def create_2_function_gu(self):
+        """stop"""
+        class Calc(Cal):
+            def __init__(self, master):
+                self.modefunction = 1
+                super(Calc, self).__init__(master)
+                self.grid()
 
-def button_addminus():
-    current = e.get()
-    e.delete(0, END)
-    if "." in current:
-        e.insert(0, -(float(current)))
-    else:
-        e.insert(0, -(int(current)))
+                self.buttons_frm = Frame(self, width=0, height=0, bg="red", padx=1, pady=1)
+                self.buttons_frm.grid(row=2, column=0)
 
-#creates the buttons, what they look like and their text
-button_1 = Button(root, text = "1", padx = 40, pady = 20, command = lambda: button_click(1)) #command links to a function which describes what the button can do
-button_2 = Button(root, text = "2", padx = 40, pady = 20, command = lambda: button_click(2))
-button_3 = Button(root, text = "3", padx = 40, pady = 20, command = lambda: button_click(3))
-button_4 = Button(root, text = "4", padx = 40, pady = 20, command = lambda: button_click(4))
-button_5 = Button(root, text = "5", padx = 40, pady = 20, command = lambda: button_click(5))
-button_6 = Button(root, text = "6", padx = 40, pady = 20, command = lambda: button_click(6))
-button_7 = Button(root, text = "7", padx = 40, pady = 20, command = lambda: button_click(7))
-button_8 = Button(root, text = "8", padx = 40, pady = 20, command = lambda: button_click(8))
-button_9 = Button(root, text = "9", padx = 40, pady = 20, command = lambda: button_click(9))
-button_0 = Button(root, text = "0", padx = 40, pady = 20, command = lambda: button_click(0))
-button_add = Button(root, text = "+", padx = 40, pady = 20, command = button_add)
-button_equal  = Button(root, text = "=", padx = 40, pady = 20, command = button_equal)
-button_clear = Button(root, text = "CE", padx = 36, pady = 20, command = button_clear)
+                self.buttons_2_functions_1_frm = Frame(self, width=0, height=0, bg="blue")
+                self.buttons_2_functions_1_frm.grid(row=2, column=1)
+                self.create_GUI()
 
-button_subtract = Button(root, text = "-", padx = 40, pady = 20, command = button_subtract)
-button_multiply = Button(root, text = "×", padx = 39, pady = 20, command = button_multiply)
-button_divide = Button(root, text = "÷", padx = 39, pady = 20, command = button_divide)
+            def create_buttons(self):
+                self.mode_change_btn = Button(self.buttons_frm, text="2nd", command=self.mode_change, padx=19, pady=10)
+                self.mode_change_btn.grid(row=0, column=0)
 
-button_decimal = Button(root, text = ".", padx = 41, pady = 20, command = button_decimal)
-button_delete = Button(root, text = "DEL", padx = 33, pady = 20, command = button_delete)
-button_power = Button(root, text = "ab", padx = 37, pady = 20, command = button_power)
-button_addminus = Button(root, text = "+/-", padx = 34, pady = 20, command = button_addminus)
+            def create_GUI(self):
+                self.create_buttons()
+                self.create_1_function_gui()
 
-#location of the button on the screen
-button_1.grid(row=3, column=0)
-button_2.grid(row=3, column=1)
-button_3.grid(row=3, column=2)
+            def create_1_function_gui(self):
+                self.sin_btn = Button(self.buttons_2_functions_1_frm, text="sin", padx=19, pady=10)
+                self.sin_btn.grid(row=0, column=0)
 
-button_4.grid(row=2, column=0)
-button_5.grid(row=2, column=1)
-button_6.grid(row=2, column=2)
+                self.cos_btn = Button(self.buttons_2_functions_1_frm, text="cos", padx=19, pady=10)
+                self.cos_btn.grid(row=0, column=1)
 
-button_7.grid(row=1, column=0)
-button_8.grid(row=1, column=1)
-button_9.grid(row=1, column=2)
+            def create_2_function_gui(self):
+                self.buttons_2_functions_2_frm = Frame(self, width=0, height=0)  # bg = "blue")
+                self.buttons_2_functions_2_frm.grid(row=0, column=0)
 
-button_0.grid(row=4, column=1)
-button_clear.grid(row=4, column=0, columnspan = 1)
-button_add.grid(row=3, column=3)
-button_equal.grid(row=5, column=3, columnspan = 1)
+                self.inverse_sin_btn = Button(self.buttons_2_functions_2_frm, text="sin-1", padx=19, pady=10)
+                self.inverse_sin_btn.grid(row=0, column=1)
 
-button_subtract.grid(row=2, column=3)
-button_multiply.grid(row=1, column=3)
-button_divide.grid(row=4, column=3)
+                self.inverse_cos_btn = Button(self.buttons_2_functions_2_frm, text="cos-1", padx=19, pady=10)
+                self.inverse_cos_btn.grid(row=4, column=2)
 
-button_decimal.grid(row=5, column=1)
-button_delete.grid(row=5, column=0)
-button_power.grid(row=5, column=2)
-button_addminus.grid(row=4, column=2)
+            def mode_change(self):
+                if self.modefunction == 1:
+                    self.buttons_2_functions_1_frm.destroy()
+                    self.modefunction = 2
+                    self.buttons_2_functions_2_frm = Frame(self, height=0, width=0)  # bg = "blue")
+                    self.buttons_2_functions_2_frm.grid(row=2, column=0)
+                    self.create_2_function_gui()
+                else:
+                    self.buttons_2_functions_2_frm.destroy()
+                    self.modefunction = 1
+                    self.buttons_2_functions_1_frm = Frame(self, height=0, width=0)  # bg = "blue")
+                    self.buttons_2_functions_1_frm.grid(row=2, column=1)
+                    self.create_1_function_gui()
 
+
+    def mode_chang(self):
+        if self.modefunctio == 1:
+            self.buttons_2_functions_1_fr.destroy()
+            self.modefunctio = 2
+            self.buttons_2_functions_2_fr = Frame(self, height = 0, width = 0)#bg = "blue")
+            self.buttons_2_functions_2_fr.grid(row = 2, column = 0)
+            self.create_2_function_gu()
+        else:
+            self.buttons_2_functions_2_fr.destroy()
+            self.modefunctio =  1
+            self.buttons_2_functions_1_fr = Frame(self, height = 0, width = 0)#bg = "blue")
+            self.buttons_2_functions_1_fr.grid(row = 2, column = 0)
+            self.create_1_function_gu()
+
+root = Tk()
+root.title("booking system")
+root.geometry("500x500")
+root.configure(bg="white")
+app = Cal(root)
 
 root.mainloop()
